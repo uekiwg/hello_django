@@ -1,6 +1,9 @@
 {% extends '../layout/base.html' %}
 {% block title %}index | {{ block.super }}{% endblock title %}
 {% block content %}
+    {% comment %}多言語対応{% endcomment %}
+    {% load i18n %}
+    {% get_current_language as LANGUAGE_CODE %}
     <form method="post">
         {% csrf_token %}
         Hello Template!<br/>
@@ -9,16 +12,16 @@
         <table class="table">
             <tbody>
                 <tr>
-                <th>User ID</th>
-                <td>{{ form.user_id }}</td>
+                    <th>{% trans 'User ID' %}</th>
+                    <td>{{ form.user_id }}</td>
                 </tr>
                 <tr>
-                <th>Password</th>
-                <td>{{ form.password }}</td>
+                    <th>{% trans 'Password' %}</th>
+                    <td>{{ form.password }}</td>
                 </tr>
                 <tr>
-                <th>Language</th>
-                <td>{{ form.lang }}</td>
+                    <th>{% trans 'Language' %}</th>
+                    <td>{{ form.lang }}</td>
                 </tr>
             </tbody>
         </table>

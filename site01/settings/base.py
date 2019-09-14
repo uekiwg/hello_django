@@ -55,19 +55,19 @@ SITE_ID = 1 # 追加
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',   # 多言語対応
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 追加
-    'site01.middleware.logging.LoggingMiddleware'
+    'site01.middleware.logging.LoggingMiddleware', # 追加
 ]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 修正 DIRSを設定しておくと、ベースディレクトリ直下の「templates」を最初の検索候補と指定することができる
+        # 修正 DIRSを設定しておくと、ベースディレクトリ直下の「template」を最初の検索候補と指定することができる
         #'DIRS': [],
         'DIRS': [os.path.join(BASE_DIR, 'template')],
         'APP_DIRS': True,
@@ -98,40 +98,48 @@ DATABASES = {
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'ja'
-
 TIME_ZONE = 'Asia/Tokyo'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
+#: 多言語対応
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
+# #: 言語一覧
+# LANG_CHOICES = (
+#     ('en', 'English'),
+#     ('ja', 'Japanese'),
+# )
+#: プルダウンの言語が多すぎる場合は、絞り込む
+# from django.utils.translation import ugettext_lazy as _
+# LANGUAGES = [
+#     ('en', _('English')),
+#     ('ja', _('Japanese')),
+# ]
+#! locale出力先
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+#: ログ
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

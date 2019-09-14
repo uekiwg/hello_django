@@ -1,0 +1,8 @@
+msgid "User ID"
+msgstr "ユーザID"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "Language"
+msgstr "言語"
