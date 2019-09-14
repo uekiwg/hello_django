@@ -1,0 +1,27 @@
+{% extends '../layout/base.html' %}
+{% block title %}index | {{ block.super }}{% endblock title %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        Hello Template!<br/>
+        methodName= {{ methodName }}<br/>
+        {% comment %} から {% endcomment %}
+        <table class="table">
+            <tbody>
+                <tr>
+                <th>User ID</th>
+                <td>{{ form.user_id }}</td>
+                </tr>
+                <tr>
+                <th>Password</th>
+                <td>{{ form.password }}</td>
+                </tr>
+                <tr>
+                <th>Language</th>
+                <td>{{ form.lang }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit"/>
+    </form>
+{% endblock %}
