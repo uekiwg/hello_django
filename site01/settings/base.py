@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # 追加
-]
+    'django.contrib.sites',   # 追加
+    'polls.apps.PollsConfig', # 追加
+ ]
 SITE_ID = 1 # 追加
 
 # Add apps/ to the Python path
@@ -69,7 +70,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 修正 DIRSを設定しておくと、ベースディレクトリ直下の「template」を最初の検索候補と指定することができる
         #'DIRS': [],
-        'DIRS': [os.path.join(BASE_DIR, 'template')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,6 +140,32 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
+#: セッション
+#: どのデータベース設定を使うかを設定する
+SESSION_CACHE_ALIAS	= 'default'
+#: cookieの有効期間
+SESSION_COOKIE_AGE = 1209600 # (2週間)
+#: cookieをどのスコープで設定するか
+SESSION_COOKIE_DOMAIN = None # (2週間)
+#: cookieにHTTPONLY属性を付与するか否か
+SESSION_COOKIE_HTTPONLY = True # (付与する)
+#: cookieのパス
+SESSION_COOKIE_PATH = '/'
+#: cookieの名称
+SESSION_COOKIE_NAME = 'sessionid'
+#: cookieのsecure属性値
+SESSION_COOKIE_SECURE = False
+#: どこにセッションデータを登録するかを制御する
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+#: cookieのsession属性値
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+#: ファイルにセッションを登録する場合のファイルパスを指定する
+SESSION_FILE_PATH = None
+#: セッションデータをリクエスト毎に保存するか否か
+SESSION_SAVE_EVERY_REQUEST = False
+# #: Session情報をシリアライズする際の、シリアライザーの指定
+# SESSION_SERIALIZER = 'djang'
+
 #: ログ
 LOGGING = {
     'version': 1,
@@ -197,3 +224,4 @@ LOGGING = {
         },
     }
 }
+
