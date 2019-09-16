@@ -22,13 +22,7 @@ class View(BaseView):
         """
         context = super().get_context_data(Form(), **kwargs)
         context['methodName'] = 'get'
-        # print("-----------------------------0")
-        # TraceUtil.printQuery()
-        # print("-----------------------------1")
         context['product_list'] = MbProduct.objects.all()
-        # TraceUtil.printQuery()
-        # print("-----------------------------2")
-        # print(str(context['product_list']))
 
         return render(request, self.template_name, context)
 
