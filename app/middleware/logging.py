@@ -40,5 +40,5 @@ class LoggingMiddleware:
                 return ''
             return str(s)
         except:
-            self.logger.error(e)
+            #self.logger.error()
             return '[ERROR]'

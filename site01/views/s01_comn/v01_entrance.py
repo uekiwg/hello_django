@@ -1,11 +1,15 @@
+from logging import getLogger
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django import forms
 from django.conf import settings
 
-from site01.site.views.extends import BaseView
-from site01.site.models.sessions import UserSession
-from site01.site.models.test import TestModel
+from site01.views.extends import BaseView
+from site01.models.sessions import UserSession
+from site01.models import MaUser
+from site01.utils.debug import TraceUtil
+
+logger = getLogger(__name__)
 
 """
 ログインビュー
@@ -19,8 +23,6 @@ class View(BaseView):
         """
         GETメソッドで呼び出される。
         """
-        test = TestModel()
-        print("test=" + test.test())
 
         # セッションクリア、クッキー削除
         request.session.clear()
@@ -48,11 +50,22 @@ class View(BaseView):
             context['methodName'] = 'post is in valid'
             return render(request, self.template_name, context)
 
+        # ユーザマスタ取得
+        user_id = form.cleaned_data['user_id']
+        logger.info("user_id = " + user_id)
+        #user = MaUser.objects.filter(user_id=user_id, delete_flg=False).first()
+        user = MaUser.objects.filter(user_id=user_id).first()
+        TraceUtil.printQuery()
+        if user == None:
+            # TODO パスワードチェック
+            context['methodName'] = 'user_id or password is in valid'
+            return render(request, self.template_name, context)
+
         # セッションへログイン情報を保存
         UserSession.create(request, form.cleaned_data)
         
         # 画面遷移
-        return HttpResponseRedirect('/s02_prod/v01_product')
+        return HttpResponseRedirect('/site01/s02_prod/v01_product')
 
 """
 ログインフォーム

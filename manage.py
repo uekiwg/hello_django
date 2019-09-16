@@ -3,10 +3,9 @@
 import os
 import sys
 
-
 def main():
     # config.settings.develop or config.settings.production
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'site01.settings.develop')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.develop')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

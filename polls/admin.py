@@ -1,5 +1,8 @@
+from logging import getLogger
 from django.contrib import admin
 from .models import Question, Choice
+
+logger = getLogger(__name__)
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
@@ -16,6 +19,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['question_text']
 
+logger.info("admin.site.register Question, QuestionAdmin")
 admin.site.register(Question, QuestionAdmin)
 
 # class QuestionAdmin(admin.ModelAdmin):

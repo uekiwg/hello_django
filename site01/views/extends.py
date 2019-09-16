@@ -1,7 +1,7 @@
 
 from django.views.generic import TemplateView
 
-from site01.site.models.sessions import UserSession
+from site01.models.sessions import UserSession
 
 class BaseView(TemplateView):
     def get_context_data(self, form, **kwargs):

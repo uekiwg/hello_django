@@ -1,5 +1,9 @@
 {% extends '../layout/base.html' %}
 {% block title %}product | {{ block.super }}{% endblock title %}
-{% block content %}
-user_id={{ user_session.user_id }}
+    {% block content %}
+    user_id={{ user_session.user_id }}
+    <br/>
+    {% for product in product_list %}
+        {{ product }}<br/>
+    {% endfor %}
 {% endblock %}

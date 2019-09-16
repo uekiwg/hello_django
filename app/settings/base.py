@@ -17,7 +17,6 @@ import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -35,8 +34,8 @@ ALLOWED_HOSTS = []
 # Djangoプロジェクトを配置したベースディレクトリをBASE_DIRに設定
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-ROOT_URLCONF = 'site01.urls'
-WSGI_APPLICATION = 'site01.wsgi.application'
+ROOT_URLCONF = 'app.urls'
+WSGI_APPLICATION = 'app.wsgi.application'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,8 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',   # 追加
-    'polls.apps.PollsConfig', # 追加
+    'django.contrib.sites',     # 追加
+    'site01.apps.Site01Config', # 追加
+    'polls.apps.PollsConfig',   # 追加
  ]
 SITE_ID = 1 # 追加
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'site01.middleware.logging.LoggingMiddleware', # 追加
+    'app.middleware.logging.LoggingMiddleware', # 追加
 ]
 
 TEMPLATES = [
@@ -217,7 +217,13 @@ LOGGING = {
             'propagate': False,
         },
         #追加
-        'development': {
+        'site01': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        #追加
+        'polls': {
             'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
