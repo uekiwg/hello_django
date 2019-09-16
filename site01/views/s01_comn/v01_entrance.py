@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django import forms
 from django.conf import settings
 
-from site01.views.extends import BaseView
+from site01.extends.views import BaseView
 from site01.models.sessions import UserSession
 from site01.models import MaUser
 from site01.utils.debug import TraceUtil

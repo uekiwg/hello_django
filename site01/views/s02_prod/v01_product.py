@@ -2,7 +2,7 @@ from logging import getLogger
 from django.shortcuts import render, redirect
 from django import forms
 
-from site01.views.extends import BaseView
+from site01.extends.views import BaseView
 from site01.models import MaUser, MbProduct
 from site01.utils.debug import TraceUtil
 
